@@ -1,0 +1,161 @@
+% CVPR 2023 Paper Template
+% based on the CVPR template provided by Ming-Ming Cheng (https://github.com/MCG-NKU/CVPR_Template)
+% modified and extended by Stefan Roth (stefan.roth@NOSPAMtu-darmstadt.de)
+
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+%%%%%%%%% PAPER TYPE  - PLEASE UPDATE FOR FINAL VERSION
+\usepackage[review]{cvpr}      % To produce the REVIEW version
+%\usepackage{cvpr}              % To produce the CAMERA-READY version
+%\usepackage[pagenumbers]{cvpr} % To force page numbers, e.g. for an arXiv version
+
+% Include other packages here, before hyperref.
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx,booktabs}
+\usepackage{multirow, makecell}
+
+
+
+% It is strongly recommended to use hyperref, especially for the review version.
+% hyperref with option pagebackref eases the reviewers' job.
+% Please disable hyperref *only* if you encounter grave issues, e.g. with the
+% file validation for the camera-ready version.
+%
+% If you comment hyperref and then uncomment it, you should delete
+% ReviewTempalte.aux before re-running LaTeX.
+% (Or just hit 'q' on the first LaTeX run, let it finish, and you
+%  should be clear).
+\usepackage[pagebackref,breaklinks,colorlinks]{hyperref}
+
+
+% Support for easy cross-referencing
+\usepackage[capitalize]{cleveref}
+\crefname{section}{Sec.}{Secs.}
+\Crefname{section}{Section}{Sections}
+\Crefname{table}{Table}{Tables}
+\crefname{table}{Tab.}{Tabs.}
+
+
+%%%%%%%%% PAPER ID  - PLEASE UPDATE
+\def\cvprPaperID{*****} % *** Enter the CVPR Paper ID here
+\def\confName{CVPR}
+\def\confYear{2023}
+
+\begin{document}
+
+\begin{table*}[!htbp]
+\centering
+\label{table:ablation_study_1}
+
+\caption{Quantitative results of ablation study. The best scores are highlighted with bold format.}
+
+\resizebox{\textwidth}{!}{
+%\begin{tabularx}{\textwidth}{ll*{5}{p{0.5cm}}*{2}{l}|*{5}{p{0.5cm}}*{2}{l}}
+
+% \begin{tabularx}{\textwidth}{ll*{2}{p{0.5cm}}c*{2}{p{0.5cm}}*{2}{l}|*{5}{p{0.5cm}}*{2}{l}}
+
+\begin{tabularx}{\textwidth}{ll*{2}{p{0.5cm}}ccp{0.5cm}l@{}l|*{2}{p{0.5cm}}ccp{0.5cm}l@{}l}
+
+\toprule
+
+\multicolumn{2}{c}{\multirow{2}{*}{Models}} & \multicolumn{7}{c|}{Fashion Video} & \multicolumn{7}{c}{iPER}\\
+ & & \scriptsize{SSIM$\uparrow$} & \scriptsize{PSNR$\uparrow$} &  \scriptsize{L1$\downarrow$} & \scriptsize{FID$\downarrow$} & \scriptsize{LPIPS$\downarrow$} & \makecell{\scriptsize{FVD} \\ \scriptsize{-Train128f$\downarrow$}} & \makecell{\scriptsize{FVD} \\ \scriptsize{-Test128f$\downarrow$}} & \scriptsize{SSIM$\uparrow$} & \scriptsize{PSNR$\uparrow$} &  \scriptsize{L1$\downarrow$} & \scriptsize{FID$\downarrow$} & \scriptsize{LPIPS$\downarrow$} & \makecell{\scriptsize{FVD} \\ \scriptsize{-Train128f$\downarrow$}} & \makecell{\scriptsize{FVD} \\ \scriptsize{-Test128f$\downarrow$}} \\
+
+\midrule
+
+\multicolumn{2}{c}{\footnotesize{Impersonator}} & \scriptsize{0.870} & \scriptsize{21.094} & \scriptsize{0.0498} & \scriptsize{18.220} & \scriptsize{0.0799} & \makecell{\scriptsize{333.951} \\  \scriptsize{± 2.054}} & \makecell{\scriptsize{374.034} \\ \scriptsize{± 6.749}} & \scriptsize{0.714} & \scriptsize{17.001} & \scriptsize{0.131} & \scriptsize{36.182} & \scriptsize{0.230} & \makecell{\scriptsize{1034.278} \\ \scriptsize{± 17.523}} & \makecell{\scriptsize{1178.021} \\ \scriptsize{± 48.840}} \\
+
+\midrule
+
+\multicolumn{2}{c}{\footnotesize{GFLA}} & \scriptsize{0.892} & \scriptsize{21.309} & \scriptsize{0.0459} & \scriptsize{16.308} & \scriptsize{0.0922} & \makecell{\scriptsize{195.205} \\  \scriptsize{± 3.036}} & \makecell{\scriptsize{256.430} \\ \scriptsize{± 7.459}} & \scriptsize{0.797} & \scriptsize{20.898} & \scriptsize{0.0853} & \scriptsize{25.075} & \scriptsize{0.149} & \makecell{\scriptsize{684.101} \\ \scriptsize{± 11.215}} & \makecell{\scriptsize{796.112} \\ \scriptsize{± 37.071}} \\
+
+\midrule
+
+\multicolumn{2}{c}{\footnotesize{Impersonator++}} & \scriptsize{0.873} & \scriptsize{21.434} & \scriptsize{0.0502} & \scriptsize{22.363} & \scriptsize{0.0761} & \makecell{\scriptsize{197.668} \\  \scriptsize{± 2.309}} & \makecell{\scriptsize{175.663} \\ \scriptsize{± 5.857}} & \scriptsize{0.755} & \scriptsize{18.689} & \scriptsize{0.103} & \scriptsize{33.629} & \scriptsize{0.173} & \makecell{\scriptsize{714.519} \\ \scriptsize{± 13.813}} & \makecell{\scriptsize{742.394} \\ \scriptsize{± 30.208}} \\
+
+\midrule
+
+\multicolumn{2}{c}{\footnotesize{DPTN}} & \scriptsize{0.907} & \scriptsize{23.996} & \scriptsize{0.0335} & \scriptsize{15.342} & \scriptsize{0.0603} & \makecell{\scriptsize{215.078} \\  \scriptsize{± 2.252}} & \makecell{\scriptsize{206.345} \\ \scriptsize{± 6.522}} & \scriptsize{0.742} & \scriptsize{17.997} & \scriptsize{0.110} & \scriptsize{34.204} & \scriptsize{0.209} & \makecell{\scriptsize{1003.598} \\ \scriptsize{± 14.715}} & \makecell{\scriptsize{1143.603} \\ \scriptsize{± 33.631}} \\
+
+\midrule
+
+\multicolumn{2}{c}{\footnotesize{NTED}} & \scriptsize{0.890} & \scriptsize{22.025} & \scriptsize{0.0425} & \scriptsize{14.263} & \scriptsize{0.0728} & \makecell{\scriptsize{278.854} \\  \scriptsize{± 3.505}} & \makecell{\scriptsize{324.128} \\ \scriptsize{± 7.753}} & \scriptsize{0.771} & \scriptsize{19.320} & \scriptsize{0.091} & \textbf{\scriptsize{20.164}} & \scriptsize{0.162} & \makecell{\scriptsize{784.509} \\ \scriptsize{± 12.908}} & \makecell{\scriptsize{916.489} \\ \scriptsize{± 46.471}} \\
+
+\midrule
+
+\multicolumn{2}{c}{\footnotesize{Ours}} & \scriptsize{\textbf{0.918}} & \textbf{\scriptsize{24.071}} & \textbf{\scriptsize{0.0302}} & \textbf{\scriptsize{14.083}} & \textbf{\scriptsize{0.0478}} & \makecell{\textbf{\scriptsize{168.275}} \\ \textbf{\scriptsize{± 2.564}}} & \makecell{\textbf{\scriptsize{148.253}} \\ \textbf{\scriptsize{± 6.781}}} & \textbf{\scriptsize{0.803}} & \textbf{\scriptsize{21.797}} & \textbf{\scriptsize{0.0724}} & \scriptsize{22.291} & \textbf{\scriptsize{0.120}} & \makecell{\textbf{\scriptsize{500.226}} \\ \textbf{\scriptsize{± 11.670}}} & \makecell{\textbf{\scriptsize{536.084}} \\ \textbf{\scriptsize{± 29.200}}} \\
+
+\bottomrule
+
+\end{tabularx}}
+\end{table*}
+
+
+\begin{table}[th]
+\centering
+\caption{Quantitative results of ablation study. The best scores are highlighted with bold format.}
+\label{table:ablation_study_2}
+\newcolumntype{C}{>{\centering\arraybackslash}X} % centered version of "X" type
+
+\begin{tabularx}{\linewidth}{@{}*{2}{p{0.1cm}}@{}*{2}{p{0.5cm}}*{2}{p{0.3cm}}p{0.4cm}r@{}l}
+%\begin{tabularx}{\linewidth}{@{}*{2}{p{0.1cm}}@{}*{2}{p{0.5cm}}c@{}c@{}p{0.4cm}r@{}l}
+% \begin{tabularx}{\linewidth}{@{}ll@{}*{2}{p{0.5cm}}c@{}rp{0.4cm}r@{}l}
+
+\toprule
+
+\multicolumn{2}{c}{Models} & \scriptsize{SSIM$\uparrow$}             & \scriptsize{PSNR$\uparrow$} & \scriptsize{L1$\downarrow$} & \scriptsize{FID$\downarrow$} & \scriptsize{LPIPS$\downarrow$} & \makecell{\scriptsize{FVD} \\ \scriptsize{-Train128f$\downarrow$}} & \makecell{\scriptsize{FVD} \\ \scriptsize{-Test128f$\downarrow$}} \\
+
+\midrule
+
+\multicolumn{6}{l}{\small{\textbf{Bidirectional Propagation}}} & & & \\
+
+\midrule
+
+\multicolumn{2}{l}{\makecell{\footnotesize{w/o forward} \\ \footnotesize{propagation}}} & \scriptsize{0.914} & \scriptsize{23.715} & \scriptsize{0.0327} & \scriptsize{15.794} & \scriptsize{0.0510} & \makecell{\scriptsize{208.354} \\ \scriptsize{± 2.833}} & \makecell{\scriptsize{188.869} \\ \scriptsize{± 9.678}} \\
+
+\midrule
+
+\multicolumn{2}{l}{\makecell{\footnotesize{w/o backward} \\ \footnotesize{propagation}}} & \scriptsize{0.908} & \scriptsize{23.179} & \scriptsize{0.0349} & \scriptsize{14.345} & \scriptsize{0.0538} & \makecell{\scriptsize{171.649} \\ \scriptsize{± 2.289}} & \makecell{\scriptsize{156.469} \\ \scriptsize{± 6.671}} \\
+
+\midrule
+
+\multicolumn{2}{l}{\makecell{\footnotesize{w/o recurrent} \\ \footnotesize{structural flow}}} & \scriptsize{0.910} & \scriptsize{23.440} & \scriptsize{0.0337} & \scriptsize{15.951} & \scriptsize{0.0527} & \makecell{\scriptsize{202.555} \\ \scriptsize{± 2.712}} & \makecell{\scriptsize{199.854} \\ \scriptsize{± 7.192}} \\
+
+\midrule
+
+\multicolumn{6}{l}{\small{\textbf{Deformable Motion Modulation}}} & & & \\
+
+\midrule
+
+\multicolumn{2}{c}{\footnotesize{w/o DMM}} & \scriptsize{0.892} & \scriptsize{21.802} & \scriptsize{0.0435} & \scriptsize{16.636} & \scriptsize{0.0935} & \makecell{\scriptsize{200.363} \\ \scriptsize{± 2.992}} & \makecell{\scriptsize{267.476} \\ \scriptsize{± 7.093}} \\
+
+\midrule
+
+\multicolumn{2}{c}{\footnotesize{w/o DCN}} & \scriptsize{0.916} & \scriptsize{23.849} & \scriptsize{0.0317} & \scriptsize{14.358} & \scriptsize{0.0484} & \makecell{\scriptsize{187.390} \\ \scriptsize{± 2.617}} & \makecell{\scriptsize{167.529} \\ \scriptsize{± 7.566}} \\
+
+\midrule
+
+\multicolumn{2}{l}{\makecell{\footnotesize{w/o style} \\ \footnotesize{weight}}} & \scriptsize{0.914} & \scriptsize{23.483} & \scriptsize{0.0330} & \scriptsize{14.497} & \scriptsize{0.0513} & \makecell{\scriptsize{176.107} \\ \scriptsize{± 2.745}} & \makecell{\scriptsize{161.549} \\ \scriptsize{± 7.245}} \\
+
+\midrule
+
+\multicolumn{2}{l}{\makecell{\footnotesize{w/o feature} \\ \footnotesize{concat}}} & \scriptsize{0.911} & \scriptsize{23.529} & \scriptsize{0.0338} & \scriptsize{14.933} & \scriptsize{0.0523} & \makecell{\scriptsize{199.483} \\ \scriptsize{± 2.224}} & \makecell{\scriptsize{172.651} \\ \scriptsize{± 8.439}} \\
+
+\midrule
+
+\multicolumn{2}{l}{\makecell{\footnotesize{w/o motion} \\ \footnotesize{mask}}} & \scriptsize{0.912} & \scriptsize{23.492} & \scriptsize{0.0343} & \scriptsize{14.554} & \scriptsize{0.0519} & \makecell{\scriptsize{191.984} \\ \scriptsize{± 2.336}} & \makecell{\scriptsize{176.882} \\ \scriptsize{± 7.004}} \\
+
+\midrule
+
+\multicolumn{2}{c}{\footnotesize{Ours}} & \textbf{\scriptsize{0.918}} & \textbf{\scriptsize{24.071}} & \textbf{\scriptsize{0.0302}} & \textbf{\scriptsize{14.083}} & \textbf{\scriptsize{0.0478}} & \makecell{\textbf{\scriptsize{168.275}} \\ \textbf{\scriptsize{± 2.564}}} & \makecell{\textbf{\scriptsize{148.253}} \\ \textbf{\scriptsize{± 6.781}}} \\
+
+\bottomrule
+
+\end{tabularx}
+\end{table}
+
+\end{document}
