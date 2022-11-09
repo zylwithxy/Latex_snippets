@@ -1,2 +1,2 @@
 # Latex_snippets
-Some useful latex snippet
+Some useful latex snippets
